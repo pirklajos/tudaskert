@@ -1,4 +1,4 @@
-self.SHELL_CACHE = 'zorka-shell-b6394ea37a9d';
+self.SHELL_CACHE = 'zorka-shell-995f54dc30e0';
 self.SHELL_ASSETS = [
   "/data/learning.json",
   "/icons/icon-192.png",

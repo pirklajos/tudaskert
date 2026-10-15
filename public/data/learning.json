@@ -276,6 +276,466 @@
         "a",
         "t"
       ]
+    },
+    {
+      "id": "word:kamion",
+      "word": "kamion",
+      "image": "🚛",
+      "units": [
+        "k",
+        "a",
+        "m",
+        "i",
+        "o",
+        "n"
+      ]
+    },
+    {
+      "id": "word:autó",
+      "word": "autó",
+      "image": "🚗",
+      "units": [
+        "a",
+        "u",
+        "t",
+        "ó"
+      ]
+    },
+    {
+      "id": "word:busz",
+      "word": "busz",
+      "image": "🚌",
+      "units": [
+        "b",
+        "u",
+        "sz"
+      ]
+    },
+    {
+      "id": "word:hajó",
+      "word": "hajó",
+      "image": "🚢",
+      "units": [
+        "h",
+        "a",
+        "j",
+        "ó"
+      ]
+    },
+    {
+      "id": "word:repülő",
+      "word": "repülő",
+      "image": "✈️",
+      "units": [
+        "r",
+        "e",
+        "p",
+        "ü",
+        "l",
+        "ő"
+      ]
+    },
+    {
+      "id": "word:bicikli",
+      "word": "bicikli",
+      "image": "🚲",
+      "units": [
+        "b",
+        "i",
+        "c",
+        "i",
+        "k",
+        "l",
+        "i"
+      ]
+    },
+    {
+      "id": "word:motor",
+      "word": "motor",
+      "image": "🏍️",
+      "units": [
+        "m",
+        "o",
+        "t",
+        "o",
+        "r"
+      ]
+    },
+    {
+      "id": "word:traktor",
+      "word": "traktor",
+      "image": "🚜",
+      "units": [
+        "t",
+        "r",
+        "a",
+        "k",
+        "t",
+        "o",
+        "r"
+      ]
+    },
+    {
+      "id": "word:eszik",
+      "word": "eszik",
+      "image": "😋🍽️",
+      "units": [
+        "e",
+        "sz",
+        "i",
+        "k"
+      ]
+    },
+    {
+      "id": "word:iszik",
+      "word": "iszik",
+      "image": "🥤",
+      "units": [
+        "i",
+        "sz",
+        "i",
+        "k"
+      ]
+    },
+    {
+      "id": "word:alszik",
+      "word": "alszik",
+      "image": "😴",
+      "units": [
+        "a",
+        "l",
+        "sz",
+        "i",
+        "k"
+      ]
+    },
+    {
+      "id": "word:fut",
+      "word": "fut",
+      "image": "🏃",
+      "units": [
+        "f",
+        "u",
+        "t"
+      ]
+    },
+    {
+      "id": "word:úszik",
+      "word": "úszik",
+      "image": "🏊",
+      "units": [
+        "ú",
+        "sz",
+        "i",
+        "k"
+      ]
+    },
+    {
+      "id": "word:sír",
+      "word": "sír",
+      "image": "😢",
+      "units": [
+        "s",
+        "í",
+        "r"
+      ]
+    },
+    {
+      "id": "word:nevet",
+      "word": "nevet",
+      "image": "😄",
+      "units": [
+        "n",
+        "e",
+        "v",
+        "e",
+        "t"
+      ]
+    },
+    {
+      "id": "word:nyúl",
+      "word": "nyúl",
+      "image": "🐰",
+      "units": [
+        "ny",
+        "ú",
+        "l"
+      ]
+    },
+    {
+      "id": "word:róka",
+      "word": "róka",
+      "image": "🦊",
+      "units": [
+        "r",
+        "ó",
+        "k",
+        "a"
+      ]
+    },
+    {
+      "id": "word:egér",
+      "word": "egér",
+      "image": "🐭",
+      "units": [
+        "e",
+        "g",
+        "é",
+        "r"
+      ]
+    },
+    {
+      "id": "word:medve",
+      "word": "medve",
+      "image": "🐻",
+      "units": [
+        "m",
+        "e",
+        "d",
+        "v",
+        "e"
+      ]
+    },
+    {
+      "id": "word:oroszlán",
+      "word": "oroszlán",
+      "image": "🦁",
+      "units": [
+        "o",
+        "r",
+        "o",
+        "sz",
+        "l",
+        "á",
+        "n"
+      ]
+    },
+    {
+      "id": "word:tehén",
+      "word": "tehén",
+      "image": "🐮",
+      "units": [
+        "t",
+        "e",
+        "h",
+        "é",
+        "n"
+      ]
+    },
+    {
+      "id": "word:malac",
+      "word": "malac",
+      "image": "🐷",
+      "units": [
+        "m",
+        "a",
+        "l",
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "word:tyúk",
+      "word": "tyúk",
+      "image": "🐔",
+      "units": [
+        "ty",
+        "ú",
+        "k"
+      ]
+    },
+    {
+      "id": "word:csiga",
+      "word": "csiga",
+      "image": "🐌",
+      "units": [
+        "cs",
+        "i",
+        "g",
+        "a"
+      ]
+    },
+    {
+      "id": "word:méh",
+      "word": "méh",
+      "image": "🐝",
+      "units": [
+        "m",
+        "é",
+        "h"
+      ]
+    },
+    {
+      "id": "word:lepke",
+      "word": "lepke",
+      "image": "🦋",
+      "units": [
+        "l",
+        "e",
+        "p",
+        "k",
+        "e"
+      ]
+    },
+    {
+      "id": "word:körte",
+      "word": "körte",
+      "image": "🍐",
+      "units": [
+        "k",
+        "ö",
+        "r",
+        "t",
+        "e"
+      ]
+    },
+    {
+      "id": "word:banán",
+      "word": "banán",
+      "image": "🍌",
+      "units": [
+        "b",
+        "a",
+        "n",
+        "á",
+        "n"
+      ]
+    },
+    {
+      "id": "word:szőlő",
+      "word": "szőlő",
+      "image": "🍇",
+      "units": [
+        "sz",
+        "ő",
+        "l",
+        "ő"
+      ]
+    },
+    {
+      "id": "word:citrom",
+      "word": "citrom",
+      "image": "🍋",
+      "units": [
+        "c",
+        "i",
+        "t",
+        "r",
+        "o",
+        "m"
+      ]
+    },
+    {
+      "id": "word:eper",
+      "word": "eper",
+      "image": "🍓",
+      "units": [
+        "e",
+        "p",
+        "e",
+        "r"
+      ]
+    },
+    {
+      "id": "word:répa",
+      "word": "répa",
+      "image": "🥕",
+      "units": [
+        "r",
+        "é",
+        "p",
+        "a"
+      ]
+    },
+    {
+      "id": "word:kenyér",
+      "word": "kenyér",
+      "image": "🍞",
+      "units": [
+        "k",
+        "e",
+        "ny",
+        "é",
+        "r"
+      ]
+    },
+    {
+      "id": "word:tej",
+      "word": "tej",
+      "image": "🥛",
+      "units": [
+        "t",
+        "e",
+        "j"
+      ]
+    },
+    {
+      "id": "word:víz",
+      "word": "víz",
+      "image": "💧",
+      "units": [
+        "v",
+        "í",
+        "z"
+      ]
+    },
+    {
+      "id": "word:könyv",
+      "word": "könyv",
+      "image": "📖",
+      "units": [
+        "k",
+        "ö",
+        "ny",
+        "v"
+      ]
+    },
+    {
+      "id": "word:ceruza",
+      "word": "ceruza",
+      "image": "✏️",
+      "units": [
+        "c",
+        "e",
+        "r",
+        "u",
+        "z",
+        "a"
+      ]
+    },
+    {
+      "id": "word:olló",
+      "word": "olló",
+      "image": "✂️",
+      "units": [
+        "o",
+        "l",
+        "l",
+        "ó"
+      ]
+    },
+    {
+      "id": "word:kulcs",
+      "word": "kulcs",
+      "image": "🔑",
+      "units": [
+        "k",
+        "u",
+        "l",
+        "cs"
+      ]
+    },
+    {
+      "id": "word:virág",
+      "word": "virág",
+      "image": "🌷",
+      "units": [
+        "v",
+        "i",
+        "r",
+        "á",
+        "g"
+      ]
     }
   ],
   "traces": [

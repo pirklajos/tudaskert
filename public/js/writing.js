@@ -1,7 +1,7 @@
 import {TRACES} from './writing-content.js';
 import {evaluateTrace,TRACE_CONFIG} from './writing-engine.js';
 import {saveResult} from './storage.js';
-import {speak} from './speech.js';
+import {speak,stopSpeech} from './speech.js';
 import {getExercise,loadPracticeLetters} from './api.js';
 import {practiceLetters,writingThreshold,writingCoverage} from './practice-letters.js';
 const NS='http://www.w3.org/2000/svg';
@@ -13,7 +13,9 @@ export function showWriting(root,home){
   function svg(name,attributes){const element=document.createElementNS(NS,name);for(const[key,value]of Object.entries(attributes))element.setAttribute(key,value);return element;}
   function release(){if(pointerId!==null&&board.hasPointerCapture(pointerId))board.releasePointerCapture(pointerId);pointerId=null;current=null;}
   function clear(){release();strokes=[];ink.replaceChildren();feedback.textContent='Húzd végig az ujjad a mintán!';}
+  let advanceTimer;
   async function start(){
+    clearTimeout(advanceTimer); stopSpeech();
     root.querySelector('section').setAttribute('aria-busy','true');
     const revision=++generation;exercise=null;clear();guide.replaceChildren();completed=false;attempts=[];next.hidden=true;root.querySelector('.check').disabled=true;
     feedback.textContent='Növekszik a betűösvény…';
@@ -30,6 +32,7 @@ export function showWriting(root,home){
       guide.append(svg('path',{d:`M ${x+14} ${y-5} l 9 5 -9 5`,transform:`rotate(${angle} ${x} ${y})`,class:'direction-arrow'}));
     }
     board.setAttribute('aria-label',`${TRACES[index].letter} betű: ujjal rajzolható minta`);
+    speak(`Rajzold le az ${TRACES[index].letter} betűt! A pöttyöknél indulj, és kövesd a nyilakat! Ha elkészültél, nyomd meg a Kész gombot!`);
   }
   let allowedIndices=[];
   async function initialize(){
@@ -49,8 +52,8 @@ export function showWriting(root,home){
   root.querySelector('.check').addEventListener('click',()=>{
     if(!exercise)return;release();const result=evaluateTrace(strokes,exercise.trace.strokes,exercise.traceConfig??TRACE_CONFIG);attempts.push({...result,strokes:structuredClone(strokes),responseTimeMs:Math.round(performance.now()-startedAt)});
     feedback.textContent=`Vonalpontosság: ${Math.round(result.precision*100)}%. A minta lefedettsége: ${Math.round(result.coverage*100)}%. `+(result.correct?'Elfogadva! Szép betűösvényt rajzoltál! 🌷':'Haladj még egy kicsit a mintán! Most még nem elfogadott. 🌱');
-    if(result.correct){completed=true;saveResult({exerciseId:exercise.id,serverIssued:!!exercise.serverIssued,module:'writing',skill:`trace:${TRACES[index].letter}`,expectedAnswer:TRACES[index].letter,givenAnswer:result,responses:attempts,correct:attempts.every(item=>item.correct),completed:true,attempts:attempts.length,responseTimeMs:Math.round(performance.now()-startedAt),difficulty:1});next.hidden=false;root.querySelector('.check').disabled=true;}
+    if(result.correct){completed=true;saveResult({exerciseId:exercise.id,serverIssued:!!exercise.serverIssued,module:'writing',skill:`trace:${TRACES[index].letter}`,expectedAnswer:TRACES[index].letter,givenAnswer:result,responses:attempts,correct:attempts.every(item=>item.correct),completed:true,attempts:attempts.length,responseTimeMs:Math.round(performance.now()-startedAt),difficulty:1});next.hidden=false;advanceTimer=setTimeout(()=>next.click(),1200);root.querySelector('.check').disabled=true;}
   });
   next.addEventListener('click',()=>{index=allowedIndices[(allowedIndices.indexOf(index)+1)%allowedIndices.length];start();});root.querySelector('.home').addEventListener('click',home);
-  root.querySelector('.help').addEventListener('click',()=>{if(!exercise)return;const message=`Rajzold le az ${TRACES[index].letter} betűt! A pöttyöknél indulj, és kövesd a nyilakat!`;feedback.textContent=message;speak(message);});initialize();return()=>{destroyed=true;generation++;release();};
+  root.querySelector('.help').addEventListener('click',()=>{if(!exercise)return;const message=`Rajzold le az ${TRACES[index].letter} betűt! A pöttyöknél indulj, és kövesd a nyilakat!`;feedback.textContent=message;speak(message);});initialize();return()=>{clearTimeout(advanceTimer);destroyed=true;generation++;release();};
 }

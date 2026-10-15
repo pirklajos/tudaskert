@@ -1,6 +1,6 @@
 import { CloudGame, createCloudExercise } from './engine.js';
 import { saveResult } from './storage.js';
-import { speak } from './speech.js';
+import { speak, stopSpeech } from './speech.js';
 import { getExercise } from './api.js';
 import { practiceLetters } from './practice-letters.js';
 import { LETTERS } from './content.js';
@@ -12,7 +12,13 @@ export function showClouds(root, home) {
   const instruction = root.querySelector('#instruction');
   const feedback = root.querySelector('.feedback');
   const next = root.querySelector('.next');
+  function readTask() {
+    if (!game.exercise) return;
+    speak(mode === 'match' ? 'Nézd meg a mintabetűt! Keresd meg a párját a felhők között!' : mode === 'pop' ? `Pukkaszd ki az összes ${game.exercise.target} betűt!` : `Figyelj! Keresd meg az ${game.exercise.target} betűt!`);
+  }
+  let advanceTimer;
   async function start() {
+    clearTimeout(advanceTimer); stopSpeech();
     const revision = ++generation;
     root.querySelector('section').setAttribute('aria-busy', 'true');
     next.hidden = true; root.querySelector('.letter-clouds').replaceChildren();
@@ -21,11 +27,12 @@ export function showClouds(root, home) {
     if (destroyed || revision !== generation) return;
     game.start(exercise);
     root.querySelector('section').setAttribute('aria-busy', 'false');
-    instruction.textContent = mode === 'pop' ? `Pukkaszd ki az összes ${exercise.target} betűt!` : mode === 'match' ? 'Keresd meg a párját!' : `Keresd meg az ${exercise.target} betűt!`;
+    instruction.textContent = mode === 'pop' ? `Pukkaszd ki az összes ${exercise.target} betűt!` : mode === 'match' ? 'Nézd meg a mintát! Melyik a párja?' : 'Figyelj a hangra! Melyik betűt hallottad?';
     root.querySelector('#reference').textContent = mode === 'match' ? exercise.target : '';
     root.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
     root.querySelectorAll('[data-level]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.level) === difficulty)));
     feedback.textContent = 'Érints meg egy felhőt!'; next.hidden = true;
+    readTask();
     const choices = root.querySelector('.letter-clouds'); choices.replaceChildren();
     exercise.choices.forEach(choice => {
       const button = document.createElement('button'); button.className = 'letter-cloud'; button.textContent = choice.label; button.setAttribute('aria-label', `${choice.label} betű`);
@@ -39,14 +46,15 @@ export function showClouds(root, home) {
           const saved = saveResult(game.finish());
           if (!saved) feedback.textContent += ' Most együtt örülünk a sikernek!';
           next.hidden = false;
+          advanceTimer = setTimeout(() => next.click(), 1200);
         }
       }); choices.append(button);
     });
   }
   root.querySelector('.home').addEventListener('click', home);
-  root.querySelector('.help').addEventListener('click', () => { if (!game.exercise) return; speak(`${instruction.textContent} ${game.exercise.target}`); feedback.textContent = instruction.textContent; });
+  root.querySelector('.help').addEventListener('click', readTask);
   root.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; start(); }));
   root.querySelectorAll('[data-level]').forEach(button => button.addEventListener('click', () => { difficulty = Number(button.dataset.level); start(); }));
   next.addEventListener('click', start); start();
-  return () => { destroyed = true; generation++; game.destroy(); };
+  return () => { clearTimeout(advanceTimer); destroyed = true; generation++; game.destroy(); };
 }
