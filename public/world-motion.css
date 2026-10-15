@@ -1,0 +1,3 @@
+/* Keep the touch target still while the cloud illustration floats. */
+.world-object.cloud{animation:none}.cloud .object-art{animation:float 6s ease-in-out infinite}
+.flowers{color:var(--ink)}

@@ -1,0 +1,16 @@
+{
+  "id": "/",
+  "name": "Zorka Tanulóvilág",
+  "short_name": "Zorka",
+  "lang": "hu",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fffdf1",
+  "theme_color": "#d6efef",
+  "description": "Játékos erdei tanulóvilág a saját tempódban.",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

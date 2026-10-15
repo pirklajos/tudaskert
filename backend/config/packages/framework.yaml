@@ -1,0 +1,21 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # Note that the session will be started ONLY if you read or write from it.
+    csrf_protection: true
+    session:
+        name: ZORKASESSID
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        gc_maxlifetime: 2592000
+        cookie_httponly: true
+        cookie_secure: auto
+        cookie_samesite: strict
+        cookie_lifetime: 2592000
+
+    #esi: true
+    #fragments: true
+
+when@test:
+    framework:
+        test: true

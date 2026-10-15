@@ -1,0 +1,23 @@
+import {test,expect} from '@playwright/test';
+test('adult gate protects progress, displays mistakes and locks on exit',async({page},testInfo)=>{
+  const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.goto('/');await page.locator('[data-place="clouds"]').click();await expect(page.locator('.activity')).toHaveAttribute('aria-busy','false');
+  const target=(await page.locator('#instruction').innerText()).match(/az (\S+) betű/)[1];
+  const csrf=(await(await page.request.get('/api/child/current')).json()).csrfToken;
+  const initialGate=await(await page.request.get('/api/parent/challenge')).json();const factors=initialGate.question.match(/\d+/g).map(Number);
+  await page.request.post('/api/parent/unlock',{data:{answer:factors[0]*factors[1]},headers:{'X-CSRF-Token':csrf}});
+  const before=await(await page.request.get('/api/progress')).json();
+  await page.request.post('/api/parent/lock',{data:{},headers:{'X-CSRF-Token':csrf}});
+  const wrong=page.locator('.letter-cloud').filter({hasNotText:target});const hasWrong=await wrong.count()>0;
+  if(hasWrong)await wrong.first().click();await page.getByRole('button',{name:`${target} betű`,exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('zorka.practice.v1'))[0].synced)).toBe(true);
+  expect((await page.request.get('/api/progress')).status()).toBe(403);
+  await page.getByRole('button',{name:'Szülőknek',exact:true}).click();await expect(page.locator('.challenge')).toContainText('×');
+  await page.locator('#parent-answer').fill('0');await page.getByRole('button',{name:'Megnézem a haladást'}).click();await expect(page.locator('#parent-message')).toContainText('Nem sikerült');
+  const numbers=(await page.locator('.challenge').innerText()).match(/\d+/g).map(Number);await page.locator('#parent-answer').fill(String(numbers[0]*numbers[1]));await page.getByRole('button',{name:'Megnézem a haladást'}).click();
+  await expect(page.locator('.dashboard')).toBeVisible();await expect(page.locator('.skill-stats')).toContainText(`Betű: ${target}`);
+  const summary=await(await page.request.get('/api/progress')).json();expect(summary.attempts).toBe(before.attempts+(hasWrong?2:1));expect(summary.completedExercises).toBe(before.completedExercises+1);expect(summary.practiceTimeMs).toBeGreaterThan(before.practiceTimeMs);
+  await page.screenshot({path:testInfo.outputPath('parent.png'),fullPage:true});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(errors).toEqual([]);
+  await page.getByRole('button',{name:'Vissza az erdei világba'}).click();await expect.poll(async()=>(await page.request.get('/api/progress')).status()).toBe(403);
+});

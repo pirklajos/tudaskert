@@ -1,0 +1,10 @@
+node_modules/
+vendor/
+.env.local
+var/
+test-results/
+playwright-report/
+*:Zone.Identifier
+
+/backend/.env.dev
+/=
