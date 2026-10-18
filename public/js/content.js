@@ -5,5 +5,6 @@ export const LOCATIONS = [
   { id: 'reading', icon: '🌳', title: 'Olvasásfa', hint: 'Itt mesék nőnek.', className: 'tree' },
   { id: 'words', icon: '🏡', title: 'Szóház', hint: 'Képekből szavak.', className: 'house' },
   { id: 'writing', icon: '🌷', title: 'Íráskert', hint: 'Rajzolj egy betűt!', className: 'garden' },
+  { id: 'math', icon: '🍎', title: 'Számliget', hint: 'Játssz a számokkal!', className: 'math-grove' },
   { id: 'rewards', icon: '🎒', title: 'Hátizsák', hint: 'A kalandjaid emlékei.', className: 'backpack' },
 ];
