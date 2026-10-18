@@ -9,6 +9,7 @@ import { showParent } from './parent.js';
 import { showRewards, localRewards } from './rewards.js';
 import { REWARDS } from './rewards-content.js';
 import { showReading } from './reading.js';
+import { showMath } from './math.js';
 import { registerPwa } from './pwa.js';
 
 const app = document.querySelector('#app');
@@ -22,6 +23,7 @@ export function navigate(id = 'world') {
   else if (id === 'parent') cleanup = showParent(app, () => navigate());
   else if (id === 'rewards') cleanup = showRewards(app, () => navigate());
   else if (id === 'reading') cleanup = showReading(app, () => navigate());
+  else if (id === 'math') cleanup = showMath(app, () => navigate());
   else showLocation(id);
   app.querySelector('h1')?.focus({ preventScroll: true });
 }
@@ -31,7 +33,7 @@ function showWorld() {
   const decoration=document.createElement('div');decoration.className='earned-decorations';decoration.setAttribute('aria-hidden','true');decoration.textContent=localRewards().map(reward=>reward.icon).join(' ');app.querySelector('.world').append(decoration);
   void getWorld().then(world=>{if(world)decoration.textContent=REWARDS.filter(reward=>world.decorations.includes(reward.decoration)).map(reward=>reward.icon).join(' ');});
   app.querySelector('.bird').addEventListener('click', () => {
-    const message = 'A felhőkben betűket kereshetsz. Válassz egy helyszínt!';
+    const message = 'A felhőkben betűket kereshetsz, a Számligetben pedig számokkal játszhatsz. Válassz egy helyszínt!';
     app.querySelector('.bird-message').textContent = message; speak(message);
   });
 }
